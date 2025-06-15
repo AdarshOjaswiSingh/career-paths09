@@ -238,7 +238,7 @@ def main():
                 # Replace this block:
                 selected_role = st.selectbox("🎓 Select a recommended path:", matched_roles or database["Path Name"].dropna().unique().tolist())
                 st.write("Available columns:", database.columns.tolist())
-                st.session_state.transcripts = database[database["Path Name"] == selected_role]["job_description_text"].dropna().tolist()
+                st.session_state.transcripts = database[database["Path Name"] == selected_role]["job_description"].dropna().tolist()
                 
                 # With this safer version:
                 if "Path Name" in database.columns:
