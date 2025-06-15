@@ -228,7 +228,11 @@ def main():
                 st.error("❌ 'Path Name' column missing.")
                 st.stop()
 
-            selected_role = st.selectbox("🎓 Select a recommended path:", matched_roles or database["Path Name"].dropna().unique().tolist())
+            selected_role = st.selectbox(
+                "🎓 Select a recommended path:", 
+                matched_roles or database["Path Name"].dropna().unique().tolist(), 
+                key="recommended_path_select")
+
 
             if selected_role and not st.session_state.get("conversation") and not st.session_state.get("current_question"):
                 # Replace this block:
