@@ -238,7 +238,7 @@ def main():
                 # With this safer version:
                 if "Path Name" in database.columns:
                     all_roles = matched_roles if matched_roles else database["Path Name"].dropna().unique().tolist()
-                    selected_role = st.selectbox("🎓 Select a recommended path:", all_roles)
+                    selected_role = st.selectbox("🎓 Select a recommended path:", all_roles, key="career_path_select")
                     st.session_state.transcripts = database[database["Path Name"] == selected_role]["job_description_text"].dropna().tolist()
                 else:
                     st.error("❌ 'Path Name' column is missing from the dataset.")
