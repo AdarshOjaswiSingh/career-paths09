@@ -10,7 +10,7 @@ import seaborn as sns
 from wordcloud import WordCloud
 from collections import Counter
 
-DB_PATH = "dataset_cultureMonkey.xlsx"
+DB_PATH = "Career_Paths_Dataset.xlsx"
 
 # ========== File Text Extractors ==========
 def extract_pdf_text(file):
