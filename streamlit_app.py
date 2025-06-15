@@ -287,7 +287,7 @@ def main():
                     if key != "Skills_JSON"
                 )
                 matched_roles = match_resume_to_roles(resume_text, database)
-            selected_role = st.selectbox("🔍 Select matched role:", matched_roles or database["job_title"].dropna().unique().tolist())
+            selected_role = st.selectbox("🔍 Select matched role:", matched_roles or database["Path Name_title"].dropna().unique().tolist())
             if st.button("▶️ Start"):
                 if selected_role:
                     st.session_state.role = selected_role
