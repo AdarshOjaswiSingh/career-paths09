@@ -239,8 +239,8 @@ def main():
         st.header("📚 About This App")
     
         st.markdown("""
-        This app is designed to assist with **resume analysis** and **job market insights**  
-        as part of a recruitment system simulation by **CultureMonkey**.
+        This app is designed to assist with **career-paths** 
+        as part of a recruitment system simulation.
     
         Built using **Python** and **Streamlit**, the system enables users to upload resumes,  
         analyze skills, and get matched to relevant job roles. It's a smart, AI-assisted tool  
@@ -249,7 +249,7 @@ def main():
     
         st.markdown("### 🎯 Objective")
         st.markdown("""
-        Design and implement a job market analysis system using the provided dataset,  
+        Design and implement a career-paths analysis system using the provided dataset,  
         focusing on extracting useful information from resumes and job listings.
         """)
     
@@ -258,8 +258,8 @@ def main():
         - 📄 **Resume Parsing & Analysis**  
           Extracts skills and experience from resumes.
         
-        - 🔍 **Job Role Matching**  
-          Suggests job roles based on the resume content using similarity scoring.
+        - 🔍 **career-paths Matching**  
+          Suggests career-paths based on the resume content using similarity scoring.
         
         - 📊 **Skill Demand Visualization**  
           Shows trends and demand for various skills in the job market.
@@ -277,7 +277,7 @@ def main():
         with col1:
             upload_data()
         with col2:
-            st.subheader("🎤 Matching Job Descriptions")
+            st.subheader("🎤 Career path Descriptions")
             database = st.session_state.get("uploaded_df", load_database())
             matched_roles = []
             if st.session_state.resume_summary:
@@ -288,7 +288,7 @@ def main():
                 )
                 matched_roles = match_resume_to_roles(resume_text, database)
             selected_role = st.selectbox("🔍 Select matched role:", matched_roles or database["job_title"].dropna().unique().tolist())
-            if st.button("▶️ Start Interview"):
+            if st.button("▶️ Start"):
                 if selected_role:
                     st.session_state.role = selected_role
                     st.session_state.conversation = []
