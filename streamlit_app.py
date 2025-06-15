@@ -188,7 +188,6 @@ def main():
     st.sidebar.title("🧭 Navigation")
     options = st.sidebar.radio("Choose a section:", ["🏠 Home", "🧠 Resume & Interview", "📥 Download", "📚 About"])
 
-    # Initialize session state
     for key in ["resume_summary", "conversation", "role", "current_question", "transcripts"]:
         st.session_state.setdefault(key, None if key == "resume_summary" else [])
 
@@ -230,14 +229,14 @@ def main():
                 st.stop()
 
             selected_role = st.selectbox("🎓 Select a recommended path:", matched_roles or database["Path Name"].dropna().unique().tolist())
-            if st.button("🚀 Start Interview Prep"):
-                if selected_role:
-                    st.session_state.role = selected_role
-                    st.session_state.conversation = []
-                    st.session_state.transcripts = database[database["Path Name"] == selected_role]["job_description_text"].dropna().tolist()
-                    if st.session_state.transcripts:
-                        st.session_state.current_question = st.session_state.transcripts.pop(0)
-                        st.session_state.conversation.append(("Interviewer", st.session_state.current_question))
+
+            if selected_role and not st.session_state.get("conversation") and not st.session_state.get("current_question"):
+                st.session_state.role = selected_role
+                st.session_state.conversation = []
+                st.session_state.transcripts = database[database["Path Name"] == selected_role]["job_description_text"].dropna().tolist()
+                if st.session_state.transcripts:
+                    st.session_state.current_question = st.session_state.transcripts.pop(0)
+                    st.session_state.conversation.append(("Interviewer", st.session_state.current_question))
 
             if st.session_state.get("current_question"):
                 st.write(f"🗣️ **Interviewer:** {st.session_state.current_question}")
