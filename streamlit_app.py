@@ -292,7 +292,7 @@ def main():
                 if selected_role:
                     st.session_state.role = selected_role
                     st.session_state.conversation = []
-                    st.session_state.transcripts = database[database["job_title"] == selected_role]["job_description_text"].dropna().tolist()
+                    selected_role = st.selectbox(" Select matched path:", matched_roles or database["Path Name"].dropna().unique().tolist())
                     if st.session_state.transcripts:
                         st.session_state.current_question = st.session_state.transcripts.pop(0)
                         st.session_state.conversation.append(("Interviewer", st.session_state.current_question))
